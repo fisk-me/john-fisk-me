@@ -36,7 +36,7 @@ handlers:
   upload: img/favicon.ico
 
 - url: /(robots\.txt|humans\.txt|crossdomain\.xml)
-  static_files: static/\1
+  static_files: \1
   upload: (robots\.txt|humans\.txt|crossdomain\.xml)
 
 - url: /img/(.*\.(gif|png|jpg))
