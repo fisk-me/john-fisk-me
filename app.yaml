@@ -1,0 +1,63 @@
+# Replace 'ae-boilerplate' with your application name
+application: john-fisk-me
+version: 1 
+runtime: python
+api_version: 1
+
+default_expiration: "30d"
+
+builtins:
+- datastore_admin: on
+
+handlers:
+# Cron jobs and other secured things
+- url: /services.*
+  script: services.py
+  login: admin
+
+# If non-authenticated user, appengine will ask for login and redirect afterwards: 
+- url: /account
+  script: app.py
+  login: required
+
+# Override appengine url to provide custom OpenID login page 
+- url: /_ah/login_required
+  script: app.py
+
+# html-5 boilerplate redirects from /... to /static/... 
+- url: /apple-touch-icon\.png
+  mime_type: image/png
+  static_files: img/apple-touch-icon.png
+  upload: img/apple-touch-icon.png
+
+- url: /favicon\.ico
+  mime_type: image/png
+  static_files: img/favicon.ico
+  upload: img/favicon.ico
+
+- url: /(robots\.txt|humans\.txt|crossdomain\.xml)
+  static_files: static/\1
+  upload: (robots\.txt|humans\.txt|crossdomain\.xml)
+
+- url: /img/(.*\.(gif|png|jpg))
+  static_files: img/\1
+  upload: img/(.*\.(gif|png|jpg))
+  
+- url: /css/(.*\.css)
+  mime_type: text/css
+  static_files: css/\1
+  upload: css/(.*\.css)
+
+- url: /js/(.*\.js)
+  mime_type: text/javascript
+  static_files: js/\1
+  upload: js/(.*\.js)
+
+- url: /(.*\.html)
+  mime_type: text/html
+  static_files: \1
+  upload: (.*\.html)
+    
+# All other requests go to app.py
+- url: /.*
+  script: app.py
