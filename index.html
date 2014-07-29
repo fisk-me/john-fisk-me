@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <title>john.fisk.me</title>
+        <meta name="generator" content="Hand coded by johnpfisk" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <!--[if lt IE 9]><script src="//cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.js"></script><![endif]-->
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+        <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+        <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.css" type="text/css" rel="stylesheet">
+        <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap-theme.css" type="text/css" rel="stylesheet">
+        <link href='//fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <style type="text/css">
+body{
+  font-family: 'Raleway', sans-serif;
+}
+#navbar1{
+  margin-bottom:0;
+}
+#navbar2.affix-top {
+    z-index:10;
+}
+#navbar2.affix {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index:10;
+}
+#content{
+  padding-top:20px;
+}
+.navbar-brand {
+    font-weight:bold;
+}
+        </style>
+    </head>
+    <body class="fuelux" >
+<div id="navbar1" class="navbar navbar-static-top">
+  <div class="container-fluid text-center">
+    <div class="navbar-header">
+      <a href="//facebook.com/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-facebook"></i></a>
+      <a href="//plus.google.com/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-google-plus"></i></a>
+      <a href="//twitter.com/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-twitter"></i></a>
+      <a href="//instagram.com/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-instagram"></i></a>
+      <a href="//youtube.com/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-youtube-play"></i></a>
+      <a href="//linked.in/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-linkedin"></i></a>
+      <a href="//flickr.com/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-flickr"></i></a>
+      <a href="//john.fisk.me/feed/rss" taget="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-rss"></i></a>
+    </div>
+  </div>
+</div>
+<div id="nav-wrapper">
+<nav id="navbar2" class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">john.fisk.me</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+      <form class="navbar-form" role="search">
+        <div class="input-group">
+          <input type="text" class="form-control">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default">Search</button>
+          </div><!-- /btn-group -->
+        </div><!-- /input-group -->
+      </form>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</div>
+
+<div id="content" class="container-fluid">
+<div id="posts" class="row">
+</div>
+</div><!-- /.container -->
+
+<script id="entry-template" type="text/x-handlebars-template">
+<div class="item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <article class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-{{Icon}}"></i> {{Title}}</h3>
+        </div>
+        <div class="panel-body">
+            {{marked Teaser}}
+        </div>
+        <div class="panel-footer">
+            {{commatolabel Tags default}}
+        </div>
+    </article>
+</div>
+</script>
+        
+        <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.js"></script>
+        <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.js"></script>
+        <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+        <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.0.0/isotope.pkgd.js"></script>
+        <!--<script type='text/javascript' src="js/isotope-fitcolumns.js"></script>-->
+        <!--<script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/fuelux/2.6.1/all.js"></script>-->
+        <script type='text/javascript' src="js/miso.ds.deps.ie.0.4.1.js"></script>
+        <script type='text/javascript'>
+
+            //////////////////////////////////
+            
+            var ds;
+
+            //////////////////////////////////
+            
+            Handlebars.registerHelper('commatolabel', function(plaintext,labelType) {
+                labelType = (typeof labelType === "undefined") ? "default" : labelType;
+                plaintext = (typeof plaintext === "undefined") ? "" : plaintext || '';
+                var i, output = '',
+                lines = plaintext.split(",");
+                for (i = 0; i < lines.length; i++) {
+                    if(lines[i]) {
+                        output += '<span class="label label-'+labelType+'"><i class="fa fa-tag"></i> ' + lines[i] + '</span> ';
+                    }
+                }
+                return new Handlebars.SafeString(output);
+            });
+
+            Handlebars.registerHelper('marked', function(plaintext) {
+                plaintext = (typeof plaintext === "undefined") ? "" : plaintext || '';
+                return new Handlebars.SafeString(marked(plaintext));
+            });
+
+            Handlebars.registerHelper('dateTimeFormat', function(context, block) {
+                return context.format(block.hash.format || "MMM Do, YYYY hh:mm");
+            });
+
+            function showEntries(entries) {
+                var template = Handlebars.compile($("#entry-template").html());
+                entries.each ( function ( entry ) {
+                    $("#posts").append(template(entry));
+                });
+            }
+            //////////////////////////////////
+            
+            $(document).ready(function() {
+            
+                $('#navbar2').affix({offset:{top:$('#navbar2').offset().top}});
+                
+                $('#nav-wrapper').height($("#navbar1").height());
+                
+                marked.setOptions({
+                  renderer   : new marked.Renderer(),
+                  gfm        : true,
+                  tables     : true,
+                  breaks     : false,
+                  pedantic   : false,
+                  sanitize   : true,
+                  smartLists : true,
+                  smartypants: true
+                });        
+
+                ds = new Miso.Dataset({
+                    importer  : Miso.Dataset.Importers.GoogleSpreadsheet,
+                    parser    : Miso.Dataset.Parsers.GoogleSpreadsheet,
+                    key       : "1-duH2HS3Y_mjbXRib3mxzjwaxfPmZ7QQvVcqwH_jeZQ",
+                    worksheet : "1",
+                    comparator : function(row1, row2) {
+                        if (row1.Modified.valueOf() < row2.Modified.valueOf())   { return  1; }
+                        if (row1.Modified.valueOf() > row2.Modified.valueOf())   { return -1; }
+                        return 0;
+                    }
+                });
+              
+                ds.fetch({ 
+                    success : function() {
+                        showEntries(ds);
+                        var $container = $('#posts').isotope({
+                          itemSelector: '.item',
+                          // layoutMode: 'fitColumns',
+                          columnWidth: '.item',
+                        })
+                    },
+                    error : function() {
+                        log("Are you sure you are connected to the internet?");
+                    }
+                });
+
+            });
+        </script>
+    </body>
+</html>
