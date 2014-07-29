@@ -38,4 +38,9 @@ handlers:
   mime_type: text/html
   static_files: \1
   upload: (.*\.html)
-  
+    
+# All other requests go to app.py
+- url: /
+  mime_type: text/html
+  static_files: /index.html
+  upload: /index.html
