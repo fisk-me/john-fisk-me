@@ -3,6 +3,7 @@ application: johnfiskme
 version: 1 
 runtime: python
 api_version: 1
+threadsafe: true
 
 default_expiration: "30d"
 
