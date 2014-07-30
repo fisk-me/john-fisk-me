@@ -61,7 +61,7 @@ body{
       <a href="//youtube.com/johnpfisk"       target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-youtube-play"></i></a>
       <a href="//linkedin.com/in/johnpfisk"   target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-linkedin"></i></a>
       <a href="//flickr.com/photos/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-flickr"></i></a>
-      <a href="//john.fisk.me/feed/rss"       target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-rss"></i></a>
+      <a href="//john.fisk.me/feed/rss"       target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm disabled"><i class="fa fa-rss"></i></a>
     </div>
   </div>
 </div>
@@ -78,14 +78,35 @@ body{
       <a class="navbar-brand" href="/">john.fisk.me</a>
     </div>
     <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Filter <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#" onclick="javascript:$('#posts').isotope({filter:'.item-Unix'});return false;">Unix</a></li>
+            <li><a href="#" onclick="javascript:$('#posts').isotope({filter:'.item-Oracle'});return false;">Oracle</a></li>
+            <li class="divider"></li>
+            <li><a href="#" onclick="javascript:$('#posts').isotope({filter:'.item-WebDev'});return false;">Web Dev</a></li>
+            <li><a href="#" onclick="javascript:$('#posts').isotope({filter:'.item-GameDev'});return false;">Game Dev</a></li>
+            <li class="divider"></li>
+            <li><a href="#" onclick="javascript:$('#posts').isotope({filter:'.item-Photo'});return false;">Photography</a></li>
+            <li><a href="#" onclick="javascript:$('#posts').isotope({filter:'.item-Design'});return false;">Design</a></li>
+            <li class="divider"></li>
+            <li><a href="#" onclick="javascript:$('#posts').isotope({filter:'.item-Site'});return false;">This site</a></li>
+            <li><a href="#" onclick="javascript:$('#posts').isotope({filter:'.item-Web'});return false;">On the Web</a></li>
+            <li class="divider"></li>
+            <li><a href="#" onclick="javascript:$('#posts').isotope({filter:''});return false;">Everything</a></li>
+          </ul>
+        </li>
+        <li>
       <form class="navbar-form" role="search">
         <div class="input-group">
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" placeholder="Work in progress&hellip;" disabled>
           <div class="input-group-btn">
-            <button type="button" class="btn btn-default">Search</button>
+            <button type="button" class="btn btn-default disabled">Search</button>
           </div><!-- /btn-group -->
         </div><!-- /input-group -->
       </form>
+      </li></ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
@@ -103,13 +124,16 @@ body{
 </div>
 
 <script id="item-template" type="text/x-handlebars-template">
-<div class="item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+<div class="item item-{{Category}} col-xs-12 col-sm-6 col-md-4 col-lg-3">
     <article class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title row"><a href="#{{_id}}-{{encodeURI Title}}" onclick="javascript:showItem({{_id}});return false;"><span class="col-xs-1"><i class="fa fa-{{Icon}}"></i></span><span class="col-xs-10">{{Title}}</span></a></h3>
         </div>
         <div class="panel-body">
             {{marked Teaser}}
+            {{#if Content}}
+            <p><a href="#{{_id}}-{{encodeURI Title}}" onclick="javascript:showItem({{_id}});return false;">More&hellip;</a></p>
+            {{/if}}
         </div>
         <div class="panel-footer">
             {{commatolabel Tags default}}
@@ -132,8 +156,8 @@ body{
         </div>
       </div>
       <div class="modal-footer">
-        <div class="pull-left text-left"><small>Created by <strong>{{Author}}</strong> on <strong>{{dateTimeFormat Created}}</strong><br />Edited by <strong>{{Editor}}</strong> on <strong>{{dateTimeFormat Modified}}</strong></small></div>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <div class="pull-left text-left small"><small>Created by <strong>{{Author}}</strong> on <strong>{{dateTimeFormat Created}}</strong><br />Edited by <strong>{{Editor}}</strong> on <strong>{{dateTimeFormat Modified}}</strong></small></div>
+        <button type="button" class="btn btn-default hidden-xs" data-dismiss="modal">Close</button>
       </div>
     </div>
 </script>
@@ -144,6 +168,7 @@ body{
         <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
         <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.0.0/isotope.pkgd.js"></script>
         <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
+        <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.min.js"></script>
         <!--<script type='text/javascript' src="js/isotope-fitcolumns.js"></script>-->
         <!--<script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/fuelux/2.6.1/all.js"></script>-->
         <script type='text/javascript' src="js/miso.ds.deps.ie.0.4.1.js"></script>
@@ -169,12 +194,12 @@ body{
             });
 
             Handlebars.registerHelper('marked', function(plaintext) {
-                plaintext = (typeof plaintext === "undefined") ? "" : plaintext || '';
-                return new Handlebars.SafeString(marked(plaintext));
+              plaintext = (typeof plaintext === "undefined") ? "" : plaintext || '';
+              return new Handlebars.SafeString(marked(plaintext));
             });
 
             Handlebars.registerHelper('dateTimeFormat', function(context, block) {
-                return context.format(block.hash.format || "MMM Do, YYYY hh:mm");
+              return context.format(block.hash.format || "MMM Do, YYYY hh:mm");
             });
 
             Handlebars.registerHelper('encodeURI', function(plaintext) {
@@ -194,6 +219,10 @@ body{
                 $("#item-full-modal").modal('show');
             }
             //////////////////////////////////
+
+            function sign(x) {
+                return typeof x === 'number' ? x ? x < 0 ? -1 : 1 : x === x ? 0 : NaN : NaN;
+            }
             
             $(document).ready(function() {
             
@@ -205,7 +234,7 @@ body{
                   $('.modal .modal-body').css('overflow-y', 'auto'); 
                   $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
                 });
-                
+
                 marked.setOptions({
                   highlight  : function (code) { return hljs.highlightAuto(code).value;},
                   renderer   : new marked.Renderer(),
@@ -223,10 +252,20 @@ body{
                     parser    : Miso.Dataset.Parsers.GoogleSpreadsheet,
                     key       : "1-duH2HS3Y_mjbXRib3mxzjwaxfPmZ7QQvVcqwH_jeZQ",
                     worksheet : "1",
+                    columns   : [
+                                  { 
+                                    name : "Created", 
+                                    type : "time",
+                                    format: "YYYY-MM-DD HH:mm:ss"
+                                  },
+                                  { 
+                                    name : "Modified", 
+                                    type : "time",
+                                    format: "YYYY-MM-DD HH:mm:ss"
+                                  }
+                                ],
                     comparator : function(row1, row2) {
-                        if (row1.Modified.valueOf() < row2.Modified.valueOf())   { return  1; }
-                        if (row1.Modified.valueOf() > row2.Modified.valueOf())   { return -1; }
-                        return 0;
+                        return sign(row2.Modified.diff(row1.Modified));
                     }
                 });
               
@@ -235,12 +274,14 @@ body{
                         showItems(ds);
                         var $container = $('#posts').isotope({
                           itemSelector: '.item',
-                          // layoutMode: 'fitColumns',
-                          columnWidth: '.item',
+                          columnWidth : '.item',
                         })
+                        $container.imagesLoaded( function() {
+                          $container.isotope('layout');
+                        });                        
                     },
                     error : function() {
-                        log("Are you sure you are connected to the internet?");
+                        console.log("Error fetching data set.");
                     }
                 });
 
