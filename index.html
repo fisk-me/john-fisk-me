@@ -106,7 +106,7 @@ body{
 <div class="item col-xs-12 col-sm-6 col-md-4 col-lg-3">
     <article class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title"><a href="#{{_id}}-{{Title}}" onclick="javascript:showItem({{_id}});return false;"><i class="fa fa-{{Icon}}"></i> {{Title}}</a></h3>
+            <h3 class="panel-title"><a href="#{{_id}}-{{encodeURI Title}}" onclick="javascript:showItem({{_id}});return false;"><i class="fa fa-{{Icon}}"></i> {{Title}}</a></h3>
         </div>
         <div class="panel-body">
             {{marked Teaser}}
@@ -175,6 +175,10 @@ body{
 
             Handlebars.registerHelper('dateTimeFormat', function(context, block) {
                 return context.format(block.hash.format || "MMM Do, YYYY hh:mm");
+            });
+
+            Handlebars.registerHelper('encodeURI', function(plaintext) {
+                return new Handlebars.SafeString(encodeURI(plaintext));
             });
 
             function showItems(entries) {
