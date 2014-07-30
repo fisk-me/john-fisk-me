@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -44,14 +43,14 @@ body{
 <div id="navbar1" class="navbar navbar-static-top">
   <div class="container-fluid text-center">
     <div class="navbar-header">
-      <a href="//facebook.com/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-facebook"></i></a>
-      <a href="//plus.google.com/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-google-plus"></i></a>
-      <a href="//twitter.com/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-twitter"></i></a>
-      <a href="//instagram.com/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-instagram"></i></a>
-      <a href="//youtube.com/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-youtube-play"></i></a>
-      <a href="//linked.in/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-linkedin"></i></a>
-      <a href="//flickr.com/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-flickr"></i></a>
-      <a href="//john.fisk.me/feed/rss" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-rss"></i></a>
+      <a href="//facebook.com/johnpfisk"      target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-facebook"></i></a>
+      <a href="//plus.google.com/johnpfisk"   target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-google-plus"></i></a>
+      <a href="//twitter.com/johnpfisk"       target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-twitter"></i></a>
+      <a href="//instagram.com/johnpfisk"     target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-instagram"></i></a>
+      <a href="//youtube.com/johnpfisk"       target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-youtube-play"></i></a>
+      <a href="//linkedin.com/in/johnpfisk"   target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-linkedin"></i></a>
+      <a href="//flickr.com/photos/johnpfisk" target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-flickr"></i></a>
+      <a href="//john.fisk.me/feed/rss"       target="_blank" role="button" class="btn navbar-btn btn-primary btn-sm"><i class="fa fa-rss"></i></a>
     </div>
   </div>
 </div>
@@ -86,20 +85,47 @@ body{
 </div>
 </div><!-- /.container -->
 
-<script id="entry-template" type="text/x-handlebars-template">
+
+<div class="modal fade" id="item-full-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+  </div>
+</div>
+
+<script id="item-template" type="text/x-handlebars-template">
 <div class="item col-xs-12 col-sm-6 col-md-4 col-lg-3">
     <article class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-{{Icon}}"></i> {{Title}}</h3>
+            <h3 class="panel-title"><a href="javascript:showItem({{_id}});"><i class="fa fa-{{Icon}}"></i> {{Title}}</a></h3>
         </div>
         <div class="panel-body">
             {{marked Teaser}}
+            <div class="text-right"><small>by {{Editor}} at {{Modified}}</small></div>
         </div>
         <div class="panel-footer">
             {{commatolabel Tags default}}
         </div>
     </article>
 </div>
+</script>
+
+<script id="item-full-template" type="text/x-handlebars-template">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-{{Icon}}"></i> {{Title}}</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+        {{marked Teaser}}
+        </div><div>
+        {{marked Content}}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="pull-left text-left"><small>Created by <strong>{{Author}}</strong> on <strong>{{dateTimeFormat Created}}</strong><br />Edited by <strong>{{Editor}}</strong> on <strong>{{dateTimeFormat Modified}}</strong></small></div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
 </script>
         
         <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -140,11 +166,17 @@ body{
                 return context.format(block.hash.format || "MMM Do, YYYY hh:mm");
             });
 
-            function showEntries(entries) {
-                var template = Handlebars.compile($("#entry-template").html());
+            function showItems(entries) {
+                var template = Handlebars.compile($("#item-template").html());
                 entries.each ( function ( entry ) {
                     $("#posts").append(template(entry));
                 });
+            }
+            
+            function showItem(id) {
+                var template = Handlebars.compile($("#item-full-template").html());
+                $("#item-full-modal .modal-dialog ").html(template(ds.rowById(id)));
+                $("#item-full-modal").modal('show');
             }
             //////////////////////////////////
             
@@ -179,7 +211,7 @@ body{
               
                 ds.fetch({ 
                     success : function() {
-                        showEntries(ds);
+                        showItems(ds);
                         var $container = $('#posts').isotope({
                           itemSelector: '.item',
                           // layoutMode: 'fitColumns',
