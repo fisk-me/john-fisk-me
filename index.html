@@ -21,6 +21,7 @@
         <style type="text/css">
 body{
   font-family: 'Raleway', sans-serif;
+  background-color:#F5EFFF;
 }
 #navbar1{
   margin-bottom:0;
@@ -42,6 +43,23 @@ body{
 }
 .panel-body img{
   margin:5px auto;
+}
+.item:before,
+.item:after {
+    content:"";
+    position:absolute;
+    z-index:-2;
+}        
+.item:before {
+    top:50%;
+    bottom:20px;
+    left:20px;
+    right:20px;
+    -webkit-box-shadow:0 0 15px rgba(0,0,0,0.6);
+    -moz-box-shadow:0 0 15px rgba(0,0,0,0.6);
+    box-shadow:0 0 15px rgba(0,0,0,0.6);
+    -moz-border-radius:100px / 10px;
+    border-radius:100px / 10px;
 }
         </style>
 <script>
