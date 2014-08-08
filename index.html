@@ -241,6 +241,7 @@ body{
                 var template = Handlebars.compile($("#item-full-template").html());
                 $("#item-full-modal .modal-dialog ").html(template(ds.rowById(id)));
                 $("#item-full-modal").modal('show');
+                history.pushState( {},"john.fisk.me | " + ds.rowById(id).Title, "#!"+id+"-"+encodeURI(ds.rowById(id).Title) );
             }
             //////////////////////////////////
 
