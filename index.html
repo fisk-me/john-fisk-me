@@ -258,7 +258,7 @@ body{
                   $('.modal .modal-body').css('overflow-y', 'auto'); 
                   $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
                 });
-
+                
                 marked.setOptions({
                   highlight  : function (code) { return hljs.highlightAuto(code).value;},
                   renderer   : new marked.Renderer(),
@@ -300,9 +300,14 @@ body{
                           itemSelector: '.item',
                           columnWidth : '.item',
                         })
+                        
                         $container.imagesLoaded( function() {
                           $container.isotope('layout');
+                          if (document.location.hash.replace("#!", "").split("-")[0] === "" ) {}else{
+                            showItem(document.location.hash.replace("#!", "").split("-")[0] );
+                          };
                         });                        
+                        
                     },
                     error : function() {
                         console.log("Error fetching data set.");
