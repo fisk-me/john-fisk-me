@@ -16,8 +16,8 @@ class RobotsPage(webapp2.RequestHandler):
         html = result.read()
         html = json.loads(html)
 
-        for entry in range(0,len(html["feed"]["entry"])/2):
-            self.response.out.write( "Allow: /#!" + html["feed"]["entry"][entry*2]["content"]["$t"].encode("utf-8").strip() + "-" + urllib.quote(html["feed"]["entry"][entry*2+1]["content"]["$t"].encode("utf-8").strip()) )
+        for entry in range(1,len(html["feed"]["entry"])/2):
+            self.response.out.write( "Allow: /#!" + html["feed"]["entry"][entry*2]["content"]["$t"].encode("utf-8").strip() + "-" + urllib.quote(html["feed"]["entry"][entry*2+1]["content"]["$t"].encode("utf-8").strip()) +"\n" )
 
 class IndexPage(webapp2.RequestHandler):
     def get(self):
