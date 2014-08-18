@@ -16,18 +16,18 @@ class RobotsPage(webapp2.RequestHandler):
         html = result.read()
         html = json.loads(html)
 
-        for entry in range(0,len(html["feed"]["entry"])):
-            self.response.out.write( "Allow: " + html["feed"]["entry"][entry*2]["content"]["$t"].encode("utf-8").strip() + "-" + html["feed"]["entry"][entry*2+1]["content"]["$t"].encode("utf-8").strip())
+        for entry in range(0,len(html["feed"]["entry"])/2):
+            self.response.out.write( "Allow: /#!" + html["feed"]["entry"][entry*2]["content"]["$t"].encode("utf-8").strip() + "-" + urllib.quote(html["feed"]["entry"][entry*2+1]["content"]["$t"].encode("utf-8").strip()) )
 
 class IndexPage(webapp2.RequestHandler):
     def get(self):
         fragment = self.request.get("_escaped_fragment_")
 
         if fragment:
-            result = urlfetch.fetch("https://spreadsheets.google.com/feeds/list/1-duH2HS3Y_mjbXRib3mxzjwaxfPmZ7QQvVcqwH_jeZQ/1/public/full?sq=uniqueid="+ urllib.quote( fragment.split("-")[0] ) +"&alt=atom")
-            if result.status_code == 200:
+            result = urllib2.urlopen("https://spreadsheets.google.com/feeds/list/1-duH2HS3Y_mjbXRib3mxzjwaxfPmZ7QQvVcqwH_jeZQ/1/public/full?sq=uniqueid="+ urllib.quote( fragment.split("-")[0] ) +"&alt=atom")
+            if result.getcode() == 200:
                 self.response.headers["Content-Type"] = "application/atom+xml"
-                self.response.out.write(result.content)
+                self.response.out.write(result.read())
             else:
                 self.response.status = 404
         else:
