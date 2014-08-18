@@ -14,7 +14,7 @@ class RobotsPage(webapp2.RequestHandler):
         html = json.loads(html)
 
         for entry in html['feed']['entry']:
-            self.response.out.write( entry['content'].encode('utf-8').strip() )
+            self.response.out.write( entry['content']['$t'].encode('utf-8').strip() )
 
 class IndexPage(webapp2.RequestHandler):
     def get(self):
