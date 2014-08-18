@@ -17,7 +17,7 @@ class IndexPage(webapp2.RequestHandler):
             result = urlfetch.fetch("https://spreadsheets.google.com/feeds/list/1-duH2HS3Y_mjbXRib3mxzjwaxfPmZ7QQvVcqwH_jeZQ/1/public/full?sq=reference="+ urllib.quote( fragment.split('-')[0] ) +"&alt=atom")
             if result.status_code == 200:
                 self.response.headers['Content-Type'] = 'application/atom+xml'
-                self.response.out.write(result)
+                self.response.out.write(result.content)
             else:
                 self.response.status = 404
         else:
@@ -28,5 +28,3 @@ app = webapp2.WSGIApplication([
     ('/robots.txt', RobotsPage),
     (r'/.*', IndexPage)
 ], debug=True)
-
-
