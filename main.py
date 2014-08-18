@@ -6,18 +6,14 @@ import json
 from google.appengine.ext.webapp import template
 from google.appengine.api import urlfetch
 
-class RobotsPage(webapp2.RequestHandler):
+class SitemapPage(webapp2.RequestHandler):
     def get(self):
         self.response.headers["Content-Type"] = "text/plain"
-        self.response.out.write( "User-Agent: *\n" )
-        self.response.out.write( "Disallow:\n" )
-
         result = urllib2.urlopen("https://spreadsheets.google.com/feeds/cells/1-duH2HS3Y_mjbXRib3mxzjwaxfPmZ7QQvVcqwH_jeZQ/1/public/basic?prettyprint=true&min-col=1&max-col=2&alt=json")
         html = result.read()
         html = json.loads(html)
-
         for entry in range(1,len(html["feed"]["entry"])/2):
-            self.response.out.write( "Allow: /#!" + html["feed"]["entry"][entry*2]["content"]["$t"].encode("utf-8").strip() + "-" + urllib.quote(html["feed"]["entry"][entry*2+1]["content"]["$t"].encode("utf-8").strip()) +"\n" )
+            self.response.out.write( "http://john.fisk.me/#!" + html["feed"]["entry"][entry*2]["content"]["$t"].encode("utf-8").strip() + "-" + urllib.quote(html["feed"]["entry"][entry*2+1]["content"]["$t"].encode("utf-8").strip()) +"\n" )
 
 class IndexPage(webapp2.RequestHandler):
     def get(self):
@@ -35,6 +31,6 @@ class IndexPage(webapp2.RequestHandler):
             self.response.out.write(open("index.html","r").read())
 
 app = webapp2.WSGIApplication([
-    ("/robots.txt", RobotsPage),
+    ("/sitemap.txt", SitemapPage),
     (r"/.*", IndexPage)
 ], debug=True)

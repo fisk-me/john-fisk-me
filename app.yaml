@@ -15,9 +15,9 @@ handlers:
   static_files: img/favicon.ico
   upload: img/favicon.ico
 
-- url: /(humans\.txt|crossdomain\.xml)
+- url: /(robots\.txt|humans\.txt|crossdomain\.xml)
   static_files: \1
-  upload: (humans\.txt|crossdomain\.xml)
+  upload: (robots\.txt|humans\.txt|crossdomain\.xml)
 
 - url: /img/(.*\.(gif|png|jpg))
   static_files: img/\1
