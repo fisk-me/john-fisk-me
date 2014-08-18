@@ -1,3 +1,4 @@
+import os
 import webapp2
 from google.appengine.ext.webapp import template
 
@@ -15,7 +16,7 @@ class IndexPage(webapp2.RequestHandler):
             self.response.write( fragment )
         else:
             self.response.headers['Content-Type'] = 'text/html'
-            self.response.out.write(template.render('index.html', None))
+            self.response.out.write(open('index.html','r').read())
 
 app = webapp2.WSGIApplication([
     ('/robots.txt', RobotsPage),
