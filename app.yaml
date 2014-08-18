@@ -1,4 +1,3 @@
-# Replace 'ae-boilerplate' with your application name
 application: johnfiskme
 version: 1
 runtime: python27
@@ -16,9 +15,9 @@ handlers:
   static_files: img/favicon.ico
   upload: img/favicon.ico
 
-- url: /(robots\.txt|humans\.txt|crossdomain\.xml)
+- url: /(humans\.txt|crossdomain\.xml)
   static_files: \1
-  upload: (robots\.txt|humans\.txt|crossdomain\.xml)
+  upload: (humans\.txt|crossdomain\.xml)
 
 - url: /img/(.*\.(gif|png|jpg))
   static_files: img/\1
@@ -34,13 +33,9 @@ handlers:
   static_files: js/\1
   upload: js/(.*\.js)
 
-- url: /(.*\.html)
-  mime_type: text/html
-  static_files: \1
-  upload: (.*\.html)
-    
-# All other requests go to app.py
-- url: /
-  mime_type: text/html
-  static_files: index.html
-  upload: index.html
+- url: /.*
+  script: main.app
+
+libraries:
+- name: webapp2
+  version: "2.5.1"
