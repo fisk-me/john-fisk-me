@@ -152,12 +152,12 @@ body{
 <div class="item item-{{Category}} col-xs-12 col-sm-6 col-md-4 col-lg-3">
     <article class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title row"><a href="#!{{reference}}-{{encodeURI Title}}" onclick="javascript:showItem({{Reference}});return false;"><span class="col-xs-1"><i class="fa fa-{{Icon}}"></i></span><span class="col-xs-10">{{Title}}</span></a></h3>
+            <h3 class="panel-title row"><a href="#!{{ID}}-{{encodeURI Title}}" onclick="javascript:showItem({{ID}});return false;"><span class="col-xs-1"><i class="fa fa-{{Icon}}"></i></span><span class="col-xs-10">{{Title}}</span></a></h3>
         </div>
         <div class="panel-body">
             {{marked Teaser}}
             {{#if Content}}
-            <p><a href="#{{Reference}}-{{encodeURI Title}}" onclick="javascript:showItem({{Reference}});return false;">More&hellip;</a></p>
+            <p><a href="#{{ID}}-{{encodeURI Title}}" onclick="javascript:showItem({{ID}});return false;">More&hellip;</a></p>
             {{/if}}
         </div>
         <div class="panel-footer">
@@ -171,7 +171,7 @@ body{
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel"><a href="#!{{Reference}}-{{encodeURI Title}}"><i class="fa fa-{{Icon}}"></i></a> {{Title}}</h4>
+        <h4 class="modal-title" id="myModalLabel"><a href="#!{{ID}}-{{encodeURI Title}}"><i class="fa fa-{{Icon}}"></i></a> {{Title}}</h4>
       </div>
       <div class="modal-body">
         <div>
