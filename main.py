@@ -15,10 +15,10 @@ class SitemapPage(webapp2.RequestHandler):
 
 class IndexPage(webapp2.RequestHandler):
     def get(self):
-        fragment = self.request.get("_escaped_fragment_") + "-"
+        fragment = self.request.get("_escaped_fragment_")
 
         if fragment:
-            result = urllib2.urlopen("https://spreadsheets.google.com/feeds/list/1-duH2HS3Y_mjbXRib3mxzjwaxfPmZ7QQvVcqwH_jeZQ/1/public/full?sq=uniqueid="+ urllib.quote( fragment.split("-")[0] ) +"&prettyprint=true&alt=json")
+            result = urllib2.urlopen("https://spreadsheets.google.com/feeds/list/1-duH2HS3Y_mjbXRib3mxzjwaxfPmZ7QQvVcqwH_jeZQ/1/public/full?sq=uniqueid="+ urllib.quote( (fragment+"-").split("-")[0] ) +"&prettyprint=true&alt=json")
             if result.getcode() == 200:
                 data = json.loads(result.read())
                 self.response.headers["Content-Type"] = "text/html"
