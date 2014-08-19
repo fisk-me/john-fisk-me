@@ -21,8 +21,8 @@ class IndexPage(webapp2.RequestHandler):
             result = urllib2.urlopen("https://spreadsheets.google.com/feeds/list/1-duH2HS3Y_mjbXRib3mxzjwaxfPmZ7QQvVcqwH_jeZQ/1/public/full?sq=uniqueid="+ urllib.quote( fragment.split("-")[0] ) +"&prettyprint=true&alt=json")
             if result.getcode() == 200:
                 data = json.loads(result.read())
-                self.response.headers["Content-Type"] = 01"application/atom+xml"
-                self.response.out.write(template.render("entry.tmpl", data))
+                self.response.headers["Content-Type"] = "text/html"
+                self.response.out.write(template.render(os.path.join(os.path.dirname(__file__), 'index.html')"entry.tmpl", data))
             else:
                 self.response.status = 404
         else:
