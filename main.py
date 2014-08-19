@@ -22,7 +22,7 @@ class IndexPage(webapp2.RequestHandler):
             if result.getcode() == 200:
                 data = json.loads(result.read())
                 self.response.headers["Content-Type"] = "text/html"
-                self.response.out.write(template.render(os.path.join(os.path.dirname(__file__), 'index.html')"entry.tmpl", data))
+                self.response.out.write(template.render(os.path.join(os.path.dirname(__file__),"entry.tmpl"), data))
             else:
                 self.response.status = 404
         else:
