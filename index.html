@@ -248,7 +248,7 @@ body{
                 var template = Handlebars.compile($("#item-full-template").html());
                 $("#item-full-modal .modal-dialog ").html(template(ds.rowById(id)));
                 $("#item-full-modal").modal('show');
-                disqusreset("/#!"+id+"-"+encodeURI(ds.rowById(id).Title),"john.fisk.me | " + ds.rowById(id).Title);
+                disqusreset("/#!"+id+"-"+encodeURI(ds.rowById(id).Title),"http://john.fisk.me/#!"+id+"-"+encodeURI(ds.rowById(id).Title));
                 history.pushState( {},"john.fisk.me | " + ds.rowById(id).Title, "/#!"+id+"-"+encodeURI(ds.rowById(id).Title) );
                 ga('send', 'pageview', {
                   'page': "/#!"+id+"-"+encodeURI(ds.rowById(id).Title),
@@ -352,13 +352,13 @@ body{
         }());
     
         /* * * Disqus Reset Function * * */
-        var disqusreset = function (newIdentifier, newTitle) {
+        var disqusreset = function (newIdentifier, newURL) {
           console.log(newIdentifier+" "+newTitle);
             DISQUS.reset({
                 reload: true,
                 config: function () {
                     this.page.identifier = newIdentifier;
-                    this.page.title = newTitle;
+                    this.page.url = newURL;
                 }
             });
         };
