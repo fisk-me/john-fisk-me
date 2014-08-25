@@ -126,9 +126,9 @@ body{
         <li>
       <form class="navbar-form" role="search">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Work in progress&hellip;" disabled>
+          <input type="text" class="form-control" placeholder="Work in progress&hellip;" id="googleSearchField">
           <div class="input-group-btn">
-            <button type="button" class="btn btn-default disabled">Search</button>
+            <button type="button" class="btn btn-default disabled" onClick="doGoogleSearch">Search</button>
           </div><!-- /btn-group -->
         </div><!-- /input-group -->
       </form>
@@ -362,6 +362,18 @@ body{
                 }
             });
         };
+        
+      function doGoogleSearch(){
+        $.ajax({
+          type: "GET",
+          url: "https://www.google.com/cse",
+          data: {"cx":"005725704632228274926:ayy39-b8hji","q":$("#googleSearchField").value()},
+          success: function(response) {
+            $("#item-full-modal .modal-dialog ").html(response);
+            $("#item-full-modal").modal('show');
+          }
+        });
+     }
     </script>
   </body>
 </html>
