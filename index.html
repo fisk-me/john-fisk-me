@@ -126,10 +126,7 @@ body{
         <li>
       <form class="navbar-form" role="search">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Work in progress&hellip;" disabled>
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-default disabled">Search</button>
-          </div><!-- /btn-group -->
+<gcse:search></gcse:search>
         </div><!-- /input-group -->
       </form>
       </li></ul>
@@ -363,5 +360,17 @@ body{
             });
         };
     </script>
+<script>
+  (function() {
+    var cx = '005725704632228274926:ayy39-b8hji';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
   </body>
 </html>
