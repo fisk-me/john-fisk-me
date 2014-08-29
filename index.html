@@ -71,8 +71,8 @@ body{
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
   ga('create', 'UA-30191683-1', 'auto');
+  ga('require', 'displayfeatures');
   ga('send', 'pageview');
 </script>
     </head>
@@ -124,11 +124,11 @@ body{
           </ul>
         </li>
         <li>
-      <form class="navbar-form" role="search">
+      <form class="navbar-form" role="search" onsubmit="doGoogleSearch();return false;">
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Work in progress&hellip;" id="googleSearchField">
           <div class="input-group-btn">
-            <button type="button" class="btn btn-default disabled" onClick="doGoogleSearch">Search</button>
+            <button type="submit" class="btn btn-default" >Search</button>
           </div><!-- /btn-group -->
         </div><!-- /input-group -->
       </form>
@@ -333,7 +333,7 @@ body{
       /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
       var disqus_shortname = 'johnfiskme';
       var disqus_identifier = '#!';
-      var disqus_url = 'http://john.fisk.me/#!';
+      var disqus_url = '//john.fisk.me/#!';
     	var disqus_config = function () { 
     	  this.language = "en";
     	};
@@ -341,7 +341,7 @@ body{
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
         (function () {
@@ -366,7 +366,7 @@ body{
       function doGoogleSearch(){
         $.ajax({
           type: "GET",
-          url: "https://www.google.com/cse",
+          url: "https://www.google.com/cse/publicurl",
           data: {"cx":"005725704632228274926:ayy39-b8hji","q":$("#googleSearchField").value()},
           success: function(response) {
             $("#item-full-modal .modal-dialog ").html(response);
