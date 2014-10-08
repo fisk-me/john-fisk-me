@@ -317,7 +317,7 @@ body{
                         
                         $container.imagesLoaded( function() {
                           $container.isotope('layout');
-						              if      (!document.location.hash.search(/#!filter/)) {$('#posts').isotope({filter:document.location.hash.replace(/#!filter:/,"")});} 
+						              if      (!document.location.hash.search(/#!filter/)) {$('#posts').isotope({filter:".item-"+document.location.hash.replace(/#!filter:/,"")});} 
                           else if (!document.location.hash.search(/#!/))       {showItem(document.location.hash.replace(/#!/,"").replace(/-.*/,""));}
                         });
                     },
