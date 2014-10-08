@@ -317,11 +317,9 @@ body{
                         
                         $container.imagesLoaded( function() {
                           $container.isotope('layout');
-                          if ((document.location.hash.replace("#!", "")+"-").split("-")[0] === "" ) {}else{
-                            showItem((document.location.hash.replace("#!", "")+"-").split("-")[0] );
-                          };
-                        });                        
-                        
+						              if      (!document.location.hash.search(/#!filter/)) {$('#posts').isotope({filter:document.location.hash.replace(/#!filter:/,"")});} 
+                          else if (!document.location.hash.search(/#!/))       {showItem(document.location.hash.replace(/#!/,"").replace(/-.*/,""));}
+                        });
                     },
                     error : function() {
                         console.log("Error fetching data set.");
