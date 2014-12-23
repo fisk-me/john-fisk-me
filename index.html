@@ -75,9 +75,6 @@ body{
   ga('require', 'displayfeatures');
   ga('send', 'pageview');
 </script>
-<script type="text/javascript"
-        src="//www.google.com/cse/brand?form=cse-search-box-form-id&inputbox=cse-search-input-box-id">
-</script>
     </head>
     <body>
 <div id="navbar1" class="navbar navbar-static-top">
@@ -127,9 +124,9 @@ body{
           </ul>
         </li>
         <li>
-      <form class="navbar-form" id="cse-search-box-form-id" role="search" onsubmit="doGoogleSearch();return false;">
+      <form class="navbar-form" id="cse-search-box-form-id" onsubmit="return doGoogleSearch();" role="search">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search john.fisk.me&hellip;" id="cse-search-input-box-id">
+          <input type="text" id="cse-search-input-box-id" size="25" autocomplete="off" class="form-control" />
           <div class="input-group-btn">
             <button type="submit" class="btn btn-default" >Search</button>
           </div><!-- /btn-group -->
@@ -364,7 +361,7 @@ body{
             });
         };
         
-      function executeQuery(){
+      function doGoogleSearch(){
         /*
         $.ajax({
           
@@ -377,7 +374,7 @@ body{
           }
         */
         $("#item-full-modal .modal-dialog ").html("<gcse:searchresults-only></gcse:searchresults-only>");
-				(function() {
+		(function() {
           var cx = '005725704632228274926:ayy39-b8hji';
           var gcse = document.createElement('script'); 
           gcse.type = 'text/javascript'; 
@@ -385,7 +382,7 @@ body{
           gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx;
           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
           var input = document.getElementById('cse-search-input-box-id');
-          var element = google.search.cse.element.getElement('searchresults-only0');
+          var element = google.search.cse.element.getElement('searchresults-only');
           if (input.value == '') {
             element.clearAllResults();
           } else {
@@ -396,5 +393,6 @@ body{
 		return false;
       };
 	</script>
+	<script type="text/javascript" src="//www.google.com/cse/brand?form=cse-search-box-form-id&inputbox=cse-search-input-box-id"></script>
   </body>
 </html>
