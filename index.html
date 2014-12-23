@@ -132,7 +132,7 @@ body{
           </ul>
         </li>
         <li>
-      <form class="navbar-form" id="cse-search-box-form-id" onsubmit="return doGoogleSearch();" role="search">
+      <form class="navbar-form" id="cse-search-box-form-id" onsubmit="doGoogleSearch();return false;" role="search">
         <div class="input-group">
           <input type="text" id="cse-search-input-box-id" size="25" autocomplete="off" class="form-control" />
           <div class="input-group-btn">
@@ -154,6 +154,12 @@ body{
 
 <div class="modal fade" id="item-full-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
+  </div>
+</div>
+
+<div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+	<gcse:searchresults-only></gcse:searchresults-only>
   </div>
 </div>
 
@@ -370,7 +376,6 @@ body{
         };
         
       function doGoogleSearch(){
-        $("#item-full-modal .modal-dialog ").html("<gcse:searchresults-only></gcse:searchresults-only>");
         (function() {
           var input = document.getElementById('cse-search-input-box-id');
           var element = google.search.cse.element.getElement('searchresults-only');
@@ -380,8 +385,8 @@ body{
             element.execute(input.value);
           }
         })();
-        $("#item-full-modal").modal('show');
-				return false;
+        $("#search-modal").modal('show');
+        return false;
       };
 	</script>
 	<script type="text/javascript" src="//www.google.com/cse/brand?form=cse-search-box-form-id&inputbox=cse-search-input-box-id"></script>
