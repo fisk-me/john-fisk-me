@@ -277,6 +277,9 @@ body{
                   'page': "/#!"+id+"-"+encodeURI(ds.rowById(id).Title),
                   'title': "john.fisk.me | " + ds.rowById(id).Title
                 });
+                $("#item-full-modal").on('hidden.bs.modal', function (e) {
+                  history.back();
+                })				
             }
             //////////////////////////////////
 
