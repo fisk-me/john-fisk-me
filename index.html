@@ -74,6 +74,14 @@ body{
   ga('create', 'UA-30191683-1', 'auto');
   ga('require', 'displayfeatures');
   ga('send', 'pageview');
+
+  (function() {
+    var cx = '005725704632228274926:ayy39-b8hji';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
 </script>
     </head>
     <body>
@@ -362,25 +370,8 @@ body{
         };
         
       function doGoogleSearch(){
-        /*
-        $.ajax({
-          
-          type: "GET",
-          url: "https://www.google.com/cse/publicurl",
-          data: {"cx":"005725704632228274926:ayy39-b8hji","q":$("#googleSearchField").val()},
-          success: function(response) {
-            $("#item-full-modal .modal-dialog ").html(response);
-            $("#item-full-modal").modal('show');
-          }
-        */
         $("#item-full-modal .modal-dialog ").html("<gcse:searchresults-only></gcse:searchresults-only>");
-		(function() {
-          var cx = '005725704632228274926:ayy39-b8hji';
-          var gcse = document.createElement('script'); 
-          gcse.type = 'text/javascript'; 
-          gcse.async = true;
-          gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx;
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+        (function() {
           var input = document.getElementById('cse-search-input-box-id');
           var element = google.search.cse.element.getElement('searchresults-only');
           if (input.value == '') {
@@ -390,7 +381,7 @@ body{
           }
         })();
         $("#item-full-modal").modal('show');
-		return false;
+				return false;
       };
 	</script>
 	<script type="text/javascript" src="//www.google.com/cse/brand?form=cse-search-box-form-id&inputbox=cse-search-input-box-id"></script>
