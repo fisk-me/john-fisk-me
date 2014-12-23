@@ -362,7 +362,9 @@ body{
         };
         
       function doGoogleSearch(){
+        /*
         $.ajax({
+          
           type: "GET",
           url: "https://www.google.com/cse/publicurl",
           data: {"cx":"005725704632228274926:ayy39-b8hji","q":$("#googleSearchField").val()},
@@ -370,7 +372,20 @@ body{
             $("#item-full-modal .modal-dialog ").html(response);
             $("#item-full-modal").modal('show');
           }
-        });
+        */
+        $("#item-full-modal .modal-dialog ").html("<gcse:search></gcse:search>");
+        (function() {
+          var cx = '007987513359902160115:m9u65xs21b0';
+          var gcse = document.createElement('script');
+          gcse.type = 'text/javascript';
+          gcse.async = true;
+          gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+              '//www.google.com/cse/cse.js?cx=' + cx;
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(gcse, s);
+        })();
+        $("#item-full-modal").modal('show');
+      });
      }
     </script>
   </body>
