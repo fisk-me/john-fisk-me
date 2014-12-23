@@ -365,7 +365,7 @@ body{
         $.ajax({
           type: "GET",
           url: "https://www.google.com/cse/publicurl",
-          data: {"cx":"005725704632228274926:ayy39-b8hji","q":$("#googleSearchField").value()},
+          data: {"cx":"005725704632228274926:ayy39-b8hji","q":$("#googleSearchField").val()},
           success: function(response) {
             $("#item-full-modal .modal-dialog ").html(response);
             $("#item-full-modal").modal('show');
