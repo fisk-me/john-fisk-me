@@ -4,6 +4,7 @@ import urllib
 import urllib2
 import json
 from google.appengine.ext.webapp import template
+from lib.markdown2 import markdown
 
 class SitemapPage(webapp2.RequestHandler):
     def get(self):
@@ -34,7 +35,7 @@ class IndexPage(webapp2.RequestHandler):
             if result.getcode() == 200:
                 data = json.loads(result.read())
                 for entry in data["feed"]["entry"]:
-                    entryData = dict( [ (k[4:], v['$t']) for k, v in entry.items() if "gsx$" in k ] )
+                    entryData = dict( [ (k[4:], markdown(v['$t'])) for k, v in entry.items() if "gsx$" in k ] )
                 self.response.headers["Content-Type"] = "text/html"
                 self.response.out.write(template.render(os.path.join(os.path.dirname(__file__),"entry.tmpl"), entryData))
             else:
