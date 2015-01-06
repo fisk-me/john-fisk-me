@@ -8,7 +8,7 @@ from google.appengine.ext.webapp import template
 class SitemapPage(webapp2.RequestHandler):
     def get(self):
         self.response.headers["Content-Type"] = "text/plain"
-        self.response.out.write( "http://john.fisk.me/" )
+        self.response.out.write( "http://john.fisk.me/\n" )
         result = urllib2.urlopen("https://spreadsheets.google.com/feeds/cells/1-duH2HS3Y_mjbXRib3mxzjwaxfPmZ7QQvVcqwH_jeZQ/1/public/basic?prettyprint=true&min-col=1&max-col=2&alt=json")
         data = json.loads(result.read())
         for entry in reversed(xrange(1,len(data["feed"]["entry"])/2)):
@@ -18,7 +18,7 @@ class SitemapPage2(webapp2.RequestHandler):
     def get(self):
         self.response.headers["Content-Type"] = "text/html"
         self.response.out.write("<html><head><title>john.fisk.me sitemap</title></head><body>");
-        self.response.out.write( "<a href='http://john.fisk.me/'>john.fisk.me</a>" )
+        self.response.out.write( "<a href='http://john.fisk.me/'>john.fisk.me</a><br />\n" )
         result = urllib2.urlopen("https://spreadsheets.google.com/feeds/cells/1-duH2HS3Y_mjbXRib3mxzjwaxfPmZ7QQvVcqwH_jeZQ/1/public/basic?prettyprint=true&min-col=1&max-col=2&alt=json")
         data = json.loads(result.read())
         for entry in reversed(xrange(1,len(data["feed"]["entry"])/2)):
