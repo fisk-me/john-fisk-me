@@ -11,16 +11,17 @@ class SitemapPage(webapp2.RequestHandler):
         self.response.out.write( "http://john.fisk.me/" )
         result = urllib2.urlopen("https://spreadsheets.google.com/feeds/cells/1-duH2HS3Y_mjbXRib3mxzjwaxfPmZ7QQvVcqwH_jeZQ/1/public/basic?prettyprint=true&min-col=1&max-col=2&alt=json")
         data = json.loads(result.read())
-        for entry in range(len(data["feed"]["entry"])/2,1,-1):
+        for entry in reversed(xrange(1,len(data["feed"]["entry"])/2)):
             self.response.out.write( "http://john.fisk.me/#!" + data["feed"]["entry"][entry*2]["content"]["$t"].encode("utf-8").strip() + "-" + urllib.quote(data["feed"]["entry"][entry*2+1]["content"]["$t"].encode("utf-8").strip()) +"\n" )
             
 class SitemapPage2(webapp2.RequestHandler):
     def get(self):
         self.response.headers["Content-Type"] = "text/html"
         self.response.out.write("<html><head><title>john.fisk.me sitemap</title></head><body>");
+        self.response.out.write( "<a href='http://john.fisk.me/'>john.fisk.me</a>" )
         result = urllib2.urlopen("https://spreadsheets.google.com/feeds/cells/1-duH2HS3Y_mjbXRib3mxzjwaxfPmZ7QQvVcqwH_jeZQ/1/public/basic?prettyprint=true&min-col=1&max-col=2&alt=json")
         data = json.loads(result.read())
-        for entry in range(len(data["feed"]["entry"])/2,1,-1):
+        for entry in reversed(xrange(1,len(data["feed"]["entry"])/2)):
             self.response.out.write( "<a href='http://john.fisk.me/#!" + data["feed"]["entry"][entry*2]["content"]["$t"].encode("utf-8").strip() + "-" + urllib.quote(data["feed"]["entry"][entry*2+1]["content"]["$t"].encode("utf-8").strip()) +"'>"+data["feed"]["entry"][entry*2+1]["content"]["$t"].encode("utf-8").strip()+"</a><br />\n" )
         self.response.out.write("</body></html>")
 
