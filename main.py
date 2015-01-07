@@ -3,6 +3,7 @@ import webapp2
 import urllib
 import urllib2
 import json
+import html
 from google.appengine.ext.webapp import template
 
 class SitemapPage(webapp2.RequestHandler):
@@ -36,7 +37,7 @@ class IndexPage(webapp2.RequestHandler):
                 for entry in data["feed"]["entry"]:
                     entryData = dict( [ (k[4:], v['$t']) for k, v in entry.items() if "gsx$" in k ] )
                 self.response.headers["Content-Type"] = "text/html"
-                self.response.out.write(template.render(os.path.join(os.path.dirname(__file__),"entry.tmpl"), entryData))
+                self.response.out.write(template.render(os.path.join(os.path.dirname(__file__),"entry.tmpl"), html.unescape(entryData)))
             else:
                 self.response.status = 404
         else:
